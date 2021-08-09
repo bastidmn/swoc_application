@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:swoc_application/constants/constants.dart';
+import 'package:swoc_application/database/data_handler.dart';
+import 'package:swoc_application/models/language.dart';
+import 'package:swoc_application/models/word.dart';
 import 'package:swoc_application/presentation/components/bottom_nav_bar.dart';
 import 'package:swoc_application/presentation/components/custom_app_bar.dart';
 import 'package:swoc_application/presentation/components/custom_small_action_button.dart';
+import 'package:swoc_application/presentation/screens/dictionary_screen.dart';
 import 'package:swoc_application/presentation/screens/general_start_screen.dart';
 import 'package:swoc_application/presentation/screens/grammar_start_screen.dart';
 import 'package:swoc_application/presentation/screens/query_start_screen.dart';
@@ -16,8 +20,9 @@ class StartingPage extends StatefulWidget {
 
 class _StartingPageState extends State<StartingPage> {
   final PageStorageBucket bucket = new PageStorageBucket();
+  DataHandler dataHandler;
   static List<Widget> pages = [
-    GrammarStartScreen(key: PageStorageKey('grammar')),
+    DictionaryScreen(key: PageStorageKey('dictionary')),
     GeneralStartScreen(key: PageStorageKey('start')),
     QueryStartScreen(key: PageStorageKey('queries')),
   ];
@@ -30,6 +35,13 @@ class _StartingPageState extends State<StartingPage> {
       initialPage: 1,
     );
 
+    Word test = new Word(
+      id: "test",
+      lang: Language.LA,
+      foreign: "venire, venio, veni",
+      german: "führen, ziehen",
+    );
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColor,
@@ -38,6 +50,7 @@ class _StartingPageState extends State<StartingPage> {
           icon: Icons.add,
           onTap: () => Navigator.pushNamed(context, '/newquery'),
         ),
+        //onTap: () => {dataHandler.addWord(test)}),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
