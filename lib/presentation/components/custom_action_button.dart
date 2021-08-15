@@ -20,37 +20,41 @@ class CustomActionButton extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: _height * 0.08,
-        width: _width * 0.66,
-        decoration: BoxDecoration(
-          color: accentColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(_height * 0.04),
+      child: Material(
+        elevation: 4.0,
+        borderRadius: BorderRadius.circular(_height * 0.04),
+        child: Container(
+          height: _height * 0.08,
+          width: _width * 0.66,
+          decoration: BoxDecoration(
+            color: accentColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(_height * 0.04),
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Icon(
-                icon,
-                color: primaryTextColor,
-                size: _height * 0.04,
-              ),
-            if (icon != null)
-              SizedBox(
-                width: _width * 0.02,
-              ),
-            Text(
-              text,
-              style: GoogleFonts.notoSans(
-                fontSize: _height * 0.03,
-                color: primaryTextColor,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null)
+                Icon(
+                  icon,
+                  color: primaryTextColor,
+                  size: _height * 0.04,
+                ),
+              if (icon != null)
+                SizedBox(
+                  width: _width * 0.02,
+                ),
+              Text(
+                text,
+                style: GoogleFonts.notoSans(
+                  fontSize: _height * 0.03,
+                  color: primaryTextColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

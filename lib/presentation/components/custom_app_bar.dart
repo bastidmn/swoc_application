@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swoc_application/constants/constants.dart';
 
-class CustomAppBar extends StatelessWidget {
-  CustomAppBar({
-    this.height,
-    this.width,
-  });
+class CustomAppBar extends StatefulWidget {
+  String title;
 
-  // final Color secondaryTextColorAlt;
-  final double height;
-  final double width;
+  CustomAppBar(this.title);
 
   @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    String title = widget.title;
+
+
     return Material(
       elevation: 8.0,
       child: Container(
@@ -37,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Übersicht', //'Startseite',
+                title, //'Startseite',
                 style: GoogleFonts.raleway(
                   fontSize: height * 0.045,
                   fontWeight: FontWeight.w800,

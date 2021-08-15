@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 // const Color kPrimary = Color(0xFF1E88E5);
 // const Color kPrimary = Color(0xFFff6033);
