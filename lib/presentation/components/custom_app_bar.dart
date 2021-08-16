@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swoc_application/constants/constants.dart';
+import 'package:swoc_application/logic/blocs/starting_page_bloc.dart';
 
 class CustomAppBar extends StatefulWidget {
-  String title;
-
-  CustomAppBar(this.title);
-
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
 }
@@ -17,8 +15,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    String title = widget.title;
-
 
     return Material(
       elevation: 8.0,
@@ -41,13 +37,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title, //'Startseite',
-                style: GoogleFonts.raleway(
-                  fontSize: height * 0.045,
-                  fontWeight: FontWeight.w800,
-                  color: primaryTextColor,
-                ),
+              BlocBuilder<StartingPageBloc, StartingPageState>(
+                builder: (context, state) {
+                  return Text(
+                    (state.getPageCount() == 1)
+                        ? 'Startseite'
+                        : (state.getPageCount() == 2)
+                            ? 'Abfragen'
+                            : 'Wortschatz',
+                    style: GoogleFonts.raleway(
+                      fontSize: height * 0.045,
+                      fontWeight: FontWeight.w800,
+                      color: primaryTextColor,
+                    ),
+                  );
+                },
               ),
               // Container(
               //   height: height * 0.1,

@@ -7,22 +7,22 @@ part 'starting_page_event.dart';
 
 part 'starting_page_state.dart';
 
-class StartingPageBloc extends Bloc<StartingPageEvent, int> {
-  StartingPageBloc() : super(1);
+class StartingPageBloc extends Bloc<StartingPageEvent, StartingPageState> {
+  StartingPageBloc() : super(StartingPageStateHome());
 
   @override
-  Stream<int> mapEventToState(
+  Stream<StartingPageState> mapEventToState(
     StartingPageEvent event,
   ) async* {
     switch (event) {
       case StartingPageEvent.dictionaries:
-        yield 0;
+        yield StartingPageStateDictionaries();
         break;
       case StartingPageEvent.home:
-        yield 1;
+        yield StartingPageStateHome();
         break;
       case StartingPageEvent.queries:
-        yield 2;
+        yield StartingPageStateQueries();
         break;
     }
   }
