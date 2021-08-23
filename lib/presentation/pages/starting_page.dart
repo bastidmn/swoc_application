@@ -19,7 +19,7 @@ class StartingPage extends StatefulWidget {
 class _StartingPageState extends State<StartingPage> {
   DataHandler dataHandler;
 
-  final PageStorageBucket bucket = new PageStorageBucket();
+  // final PageStorageBucket bucket = new PageStorageBucket();
   static List<Widget> pages = [
     DictionaryScreen(key: PageStorageKey('dictionary')),
     GeneralStartScreen(key: PageStorageKey('start')),
@@ -62,31 +62,31 @@ class _StartingPageState extends State<StartingPage> {
                 },
               ),
               Expanded(
-                child: PageStorage(
-                  bucket: bucket,
-                  child: BlocListener<StartingPageBloc, StartingPageState>(
-                    listener: (context, state) {
-                      double from = _pageController.page;
-                      int to = state.getPageCount();
-                      ((to - from).abs() > 1)
-                          ? _pageController.animateToPage(to,
-                              duration: Duration(milliseconds: 1200),
-                              curve: Curves.ease)
-                          : _pageController.animateToPage(
-                              to,
-                              duration: Duration(milliseconds: 800),
-                              curve: Curves.ease,
-                            );
-                    },
-                    child: PageView(
-                      scrollDirection: Axis.horizontal,
-                      controller: _pageController,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: pages,
-                    ),
+                // child: PageStorage(
+                //   bucket: bucket,
+                child: BlocListener<StartingPageBloc, StartingPageState>(
+                  listener: (context, state) {
+                    double from = _pageController.page;
+                    int to = state.getPageCount();
+                    ((to - from).abs() > 1)
+                        ? _pageController.animateToPage(to,
+                            duration: Duration(milliseconds: 1400),
+                            curve: Curves.ease)
+                        : _pageController.animateToPage(
+                            to,
+                            duration: Duration(milliseconds: 800),
+                            curve: Curves.ease,
+                          );
+                  },
+                  child: PageView(
+                    scrollDirection: Axis.horizontal,
+                    controller: _pageController,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: pages,
                   ),
                 ),
               ),
+              //),
             ],
           ),
           bottomNavigationBar: BottomNavBar(),

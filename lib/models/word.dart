@@ -6,18 +6,18 @@ import 'package:uuid/uuid.dart';
 class Word {
   String id;
   Language lang;
-  String foreign;
+  String alien;
   String german;
 
   //Create new Word
-  Word.newWord(Language lang, String foreign, String german) {
+  Word.newWord(Language lang, String alien, String german) {
     id = new Uuid().v4().toString();
     this.lang = lang;
-    this.foreign = foreign;
+    this.alien = alien;
     this.german = german;
   }
 
-  Word({this.id, this.lang, this.foreign, this.german});
+  Word({this.id, this.lang, this.alien, this.german});
 
   Word wordFromJson(String string) {
     final jsonData = json.decode(string);
@@ -30,16 +30,16 @@ class Word {
   }
 
   factory Word.fromMap(Map<String, dynamic> json) => new Word(
-        id: json["id"],
-        lang: json["lang"],
-        foreign: json["foreign"],
-        german: json["german"],
+        id: json['id'],
+        lang: LanguageHelper.getLanguage(json['lang']),
+        alien: json['alien'],
+        german: json['german'],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "lang": lang,
-        "foreign": foreign,
-        "german": german,
+        'id': id,
+        'lang': LanguageHelper.getString(lang),
+        'alien': alien,
+        'german': german,
       };
 }

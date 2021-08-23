@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swoc_application/constants/constants.dart';
@@ -12,6 +14,16 @@ class DictionaryScreen extends StatefulWidget {
 }
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
+  void updateData() {
+    log('Data updated from dictionaries');
+  }
+
+  @override
+  void initState() {
+    updateData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;

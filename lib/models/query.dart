@@ -2,39 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:swoc_application/models/language.dart';
 
 class Query {
-  String _id;
-  //Language _lang;
-  String _name;
-  //String _iconCode;
-  //DateTime _lastAccessed;
-  List<String> _goodIds;
-  List<String> _badIds;
-
-  get id {
-    return _id;
-  }
-
-  // get lang {
-  //   return _lang;
-  // }
-
-  get name {
-    return _name;
-  }
-
-  // get iconColor {
-  //   return _iconColor;
-  // }
-  //
-  // get lastAccessed {
-  //   return _lastAccessed;
-  // }
-
-  get goodIds {
-    return _goodIds;
-  }
-
-  get badIds {
-    return _badIds;
-  }
+  // CREATE TABLE Queries (
+  // id TEXT PRIMARY KEY,
+  //     name TEXT,
+  // lastAccessed TEXT,
+  //     lang TEXT,
+  // iconId INTEGER,
+  //     goodCount INTEGER,
+  // badCount INTEGER,
+  //     goodIds TEXT,
+  // badIds TEXT,
+  // );
+  String id;
+  String name;
+  DateTime lastAccessed;
+  Language lang;
+  int iconId;
+  int goodCount;
+  int badCount;
+  List<String> goodIds;
+  List<String> badIds;
 }

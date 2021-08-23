@@ -2,20 +2,38 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:swoc_application/constants/constants.dart';
+import 'package:swoc_application/database/data_handler.dart';
 import 'package:swoc_application/presentation/components/starting_page_latest_card.dart';
 import 'package:swoc_application/presentation/components/starting_page_schedule.dart';
 import 'package:swoc_application/presentation/components/starting_page_timetable.dart';
 
-class GeneralStartScreen extends StatelessWidget {
+class GeneralStartScreen extends StatefulWidget {
   const GeneralStartScreen({Key key}) : super(key: key);
+
+  @override
+  _GeneralStartScreenState createState() => _GeneralStartScreenState();
+}
+
+class _GeneralStartScreenState extends State<GeneralStartScreen> {
+  DataHandler database = DataHandler.dataHandler;
+
+  void updateData() {
+    log('Data updated from home');
+  }
+
+  @override
+  void initState() {
+    updateData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    log('Rebuild');
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification overscroll) {
         overscroll.disallowGlow();

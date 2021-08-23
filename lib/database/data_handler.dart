@@ -26,38 +26,58 @@ class DataHandler {
 
   initDB() async {
     Directory documents = await getApplicationDocumentsDirectory();
-    String path = join(documents.path, "SwocDB.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
+    String path = join(documents.path, 'SwocDB.db');
+    log('Database create');
+    return await openDatabase(path, version: 2, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE Words ("
-          "id TEXT PRIMARY KEY,"
-          "lang TEXT,"
-          "foreign TEXT,"
-          "german TEXT"
-          ");"
-          "CREATE TABLE ");
-      log("Word saved");
+      await db.execute('''
+        CREATE TABLE Words (
+          id TEXT PRIMARY KEY,
+          lang TEXT,
+          alien TEXT,
+          german TEXT
+        );
+        CREATE TABLE Queries (
+          id TEXT PRIMARY KEY,
+          name TEXT,
+          lastAccessed TEXT,
+          lang TEXT,
+          iconId INTEGER,
+          goodCount INTEGER,
+          badCount INTEGER,
+          goodIds TEXT,
+          badIds TEXT,
+        );
+        '''
+          //"CREATE TABLE Queries ("
+          // "id TEXT PRIMARY KEY,"
+          // "name TEXT,"
+          // "lang TEXT,"
+          // "lastOpened TEXT,"
+          // "goodWordCount INTEGER,"
+          // "badWordCount INTEGER,"
+          // "goodWordIds TEXT,"
+          // "badWordIds TEXT,"
+          // ");"
+          );
     });
   }
 
   addWord(Word word) async {
     var db = await database;
-    var res = db.insert("Words", word.toMap());
-    return res;
+    db.insert('Words', word.toMap());
+    return word.id;
+  }
+
+  void getWord(String id) async {
+    var db = await database;
+    var res = await db.rawQuery('SELECT  FROM Words WHERE id=?', ['$id']);
+    log(res.first.toString());
   }
 
   List<QueryProxy> getQueries() {
     //Mock Todo: Implement Database
     List<QueryProxy> proxies = new List.empty();
-    proxies.add(new QueryProxy(
-      'lol',
-      Language.LA,
-      'Test Abfrage',
-      'aa',
-      121,
-      121,
-      DateTime.now(),
-    ));
     return proxies;
   }
 
