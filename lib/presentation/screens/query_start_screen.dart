@@ -252,6 +252,10 @@ class QueryOverviewCard extends StatefulWidget {
 }
 
 class _QueryOverviewCardState extends State<QueryOverviewCard> {
+  void _emitDeleteEvent(String id) {
+    context.read<QueryPageBloc>().add(new DeleteEvent(id));
+  }
+
   void _showCardActionDialog() {
     showDialog(
         context: context,
@@ -288,10 +292,9 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    //Todo: Fix access problem
                     GestureDetector(
                       onTap: () {
-                        log('Delete ${widget.queryId}');
+                        _emitDeleteEvent(widget.queryId);
                         // context
                         //     .read<QueryPageBloc>()
                         //     .add(QueryPageEvent.deleteEvent);
@@ -450,7 +453,7 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
                               Text(
                                 'Starke Vokabeln',
                                 style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.025,
+                                  fontSize: height * 0.022,
                                   color: secondaryTextColor,
                                 ),
                               ),
@@ -491,8 +494,9 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
                             children: [
                               Text(
                                 'Schwache Vokabeln',
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.025,
+                                  fontSize: height * 0.022,
                                   color: secondaryTextColor,
                                 ),
                               ),

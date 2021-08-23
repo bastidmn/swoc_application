@@ -15,19 +15,16 @@ class QueryPageBloc extends Bloc<QueryPageEvent, QueryPageState> {
   Stream<QueryPageState> mapEventToState(
     QueryPageEvent event,
   ) async* {
-    switch (event) {
-      case QueryPageEvent.createEvent:
-        log('New Query has been created');
-        yield NewQueryPageState();
-        break;
-      case QueryPageEvent.deleteEvent:
-        log('Query has been deleted');
-        yield NewQueryPageState();
-        break;
-      case QueryPageEvent.updateEvent:
-        log('Update query page');
-        yield NewQueryPageState();
-        break;
+    if (event is DeleteEvent) {
+      log('Query with id: ${event.deletedId} been deleted');
+      //Database Command
+      yield NewQueryPageState();
+    } else if (event is CreateEvent) {
+      log('New Query has been created');
+      yield NewQueryPageState();
+    } else {
+      log('Update query page');
+      yield NewQueryPageState();
     }
   }
 }

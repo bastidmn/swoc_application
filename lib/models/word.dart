@@ -19,17 +19,17 @@ class Word {
 
   Word({this.id, this.lang, this.alien, this.german});
 
-  Word wordFromJson(String string) {
+  static Word wordFromJson(String string) {
     final jsonData = json.decode(string);
     return Word.fromMap(jsonData);
   }
 
-  String wordToJson(Word word) {
+  static String wordToJson(Word word) {
     final dyn = word.toMap();
     return json.encode(dyn);
   }
 
-  factory Word.fromMap(Map<String, dynamic> json) => new Word(
+  static Word fromMap(Map<String, dynamic> json) => new Word(
         id: json['id'],
         lang: LanguageHelper.getLanguage(json['lang']),
         alien: json['alien'],
