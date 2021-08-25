@@ -19,7 +19,7 @@ class StartingPage extends StatefulWidget {
 class _StartingPageState extends State<StartingPage> {
   DataHandler dataHandler;
 
-  // final PageStorageBucket bucket = new PageStorageBucket();
+  final PageStorageBucket bucket = new PageStorageBucket();
   static List<Widget> pages = [
     DictionaryScreen(key: PageStorageKey('dictionary')),
     GeneralStartScreen(key: PageStorageKey('start')),
@@ -62,31 +62,33 @@ class _StartingPageState extends State<StartingPage> {
                 },
               ),
               Expanded(
-                // child: PageStorage(
-                //   bucket: bucket,
-                child: BlocListener<StartingPageBloc, StartingPageState>(
-                  listener: (context, state) {
-                    double from = _pageController.page;
-                    int to = state.getPageCount();
-                    ((to - from).abs() > 1)
-                        ? _pageController.animateToPage(to,
-                            duration: Duration(milliseconds: 1400),
-                            curve: Curves.ease)
-                        : _pageController.animateToPage(
-                            to,
-                            duration: Duration(milliseconds: 800),
-                            curve: Curves.ease,
-                          );
-                  },
-                  child: PageView(
-                    scrollDirection: Axis.horizontal,
-                    controller: _pageController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: pages,
+                child: PageStorage(
+                  bucket: bucket,
+                  child: BlocListener<StartingPageBloc, StartingPageState>(
+                    listener: (context, state) {
+                      double from = _pageController.page;
+                      int to = state.getPageCount();
+                      //Todo: Look into performance for animation
+                      _pageController.jumpToPage(to);
+                      // ((to - from).abs() > 1)
+                      //     ? _pageController.animateToPage(to,
+                      //         duration: Duration(milliseconds: 1400),
+                      //         curve: Curves.ease)
+                      //     : _pageController.animateToPage(
+                      //         to,
+                      //         duration: Duration(milliseconds: 800),
+                      //         curve: Curves.ease,
+                      //       );
+                    },
+                    child: PageView(
+                      scrollDirection: Axis.horizontal,
+                      controller: _pageController,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: pages,
+                    ),
                   ),
                 ),
               ),
-              //),
             ],
           ),
           bottomNavigationBar: BottomNavBar(),
@@ -110,15 +112,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
     //Widget
     return Container(
-      height: height * 0.09,
+      height: height * 0.08,
       decoration: BoxDecoration(
         color: secondaryColor,
-        border: Border(
-          top: BorderSide(
-            color: Color(0xFF999999),
-            width: 1.0,
-          ),
-        ),
+        // border: Border(
+        //   top: BorderSide(
+        //     color: Color(0xFF808080),
+        //     width: 1.0,
+        //   ),
+        // ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +135,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   return Icon(
                     //Icons.menu_book,
                     Icons.note_add_outlined,
-                    size: height * 0.05,
+                    size: height * 0.045,
                     color: (state.getPageCount() == 0)
                         ? _activeColor
                         : _passiveColor,
@@ -153,7 +155,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 builder: (context, state) {
                   return Icon(
                     Icons.home,
-                    size: height * 0.05,
+                    size: height * 0.045,
                     color: (state.getPageCount() == 1)
                         ? _activeColor
                         : _passiveColor,
@@ -171,7 +173,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 builder: (context, state) {
                   return Icon(
                     Icons.sort,
-                    size: height * 0.05,
+                    size: height * 0.045,
                     color: (state.getPageCount() == 2)
                         ? _activeColor
                         : _passiveColor,

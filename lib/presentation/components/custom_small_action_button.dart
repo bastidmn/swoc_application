@@ -27,7 +27,7 @@ class CustomSmallActionButton extends StatelessWidget {
           child: Icon(
             icon,
             color: primaryTextColor,
-            size: _height * 0.04,
+            size: _height * 0.045,
           ),
         ),
       ),

@@ -21,70 +21,64 @@ class CustomAppBarArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.09,
+      height: height * 0.08,
       width: width,
       decoration: BoxDecoration(
         color: primaryColor,
       ),
       child: Row(
         children: [
-          //ghjTODO: Add Logo Image
-          Padding(
-            padding: EdgeInsets.all(height * 0.01),
-            child: GestureDetector(
-              child: Container(
-                width: height * 0.08,
-                height: height * 0.08,
+          GestureDetector(
+            child: Tooltip(
+              message: 'Zurück',
+              textStyle: GoogleFonts.sourceSansPro(
+                fontSize: height * 0.03,
+                color: primaryTextColor,
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.03,
+                  right: width * 0.03,
+                ),
                 child: Icon(
                   Icons.arrow_back_outlined,
                   color: secondaryColor,
-                  size: height * 0.04,
+                  size: height * 0.045,
                 ),
               ),
-              onTap: onTap,
             ),
+            onTap: () => Navigator.pop(context),
           ),
           Text(
             title,
-            style: GoogleFonts.raleway(
+            style: GoogleFonts.notoSans(
               fontSize: height * 0.04,
               fontWeight: FontWeight.w800,
               color: primaryTextColor,
             ),
           ),
           Spacer(),
-          Container(
-            child: (isSettingsPage == true)
-                ? GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/help'),
-                    child: Padding(
-                      padding: EdgeInsets.all(height * 0.01),
-                      child: Container(
-                        width: height * 0.08,
-                        height: height * 0.08,
-                        child: Icon(
-                          Icons.help_outline_sharp,
-                          color: secondaryColor,
-                          size: height * 0.05,
-                        ),
-                      ),
-                    ),
-                  )
-                : GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, '/settings'),
-                    child: Padding(
-                      padding: EdgeInsets.all(height * 0.01),
-                      child: Container(
-                        width: height * 0.08,
-                        height: height * 0.08,
-                        child: Icon(
-                          Icons.settings_sharp,
-                          color: secondaryColor,
-                          size: height * 0.05,
-                        ),
-                      ),
-                    ),
-                  ),
+          GestureDetector(
+            child: Tooltip(
+              message: (isSettingsPage) ? 'Hilfe' : 'Einstellungen',
+              textStyle: GoogleFonts.sourceSansPro(
+                fontSize: height * 0.03,
+                color: primaryTextColor,
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(right: width * 0.03),
+                child: Icon(
+                  (isSettingsPage)
+                      ? Icons.help_outline_sharp
+                      : Icons.settings_sharp,
+                  color: secondaryColor,
+                  size: height * 0.045,
+                ),
+              ),
+            ),
+            onTap: () => (isSettingsPage)
+                ? Navigator.pushNamed(context, '/help')
+                : Navigator.pushNamed(context, '/settings'),
           ),
         ],
       ),

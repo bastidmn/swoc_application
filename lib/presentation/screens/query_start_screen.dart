@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swoc_application/constants/constants.dart';
@@ -31,12 +33,7 @@ class _QueryStartScreenState extends State<QueryStartScreen> {
   void initState() {
     updateData();
     super.initState();
-    dropdownValue = 'date';
-    // String _wordId = DataHandler.dataHandler.addWord(new Word.newWord(
-    //   Language.LA,
-    //   'venire, venio, veni',
-    //   'kommen',
-    // ));
+    dropdownValue = 'latein';
   }
 
   @override
@@ -65,9 +62,9 @@ class _QueryStartScreenState extends State<QueryStartScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: Material(
-                          elevation: 4.0,
+                          elevation: 6.0,
                           borderRadius: BorderRadius.circular(width),
                           child: Container(
                             height: height * 0.06,
@@ -98,58 +95,79 @@ class _QueryStartScreenState extends State<QueryStartScreen> {
                       ),
                       Expanded(
                         flex: 1,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: DropdownButton<String>(
-                            underline: SizedBox(),
-                            style: GoogleFonts.sourceSansPro(
-                              color: secondaryTextColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: width * 0.04,
-                            ),
-                            value: dropdownValue,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                dropdownValue = newValue;
-                                log(dropdownValue);
-                              });
-                            },
-                            items: [
-                              DropdownMenuItem(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Name',
-                                    ),
-                                  ],
-                                ),
-                                value: 'name',
-                              ),
-                              DropdownMenuItem(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Datum',
-                                    ),
-                                  ],
-                                ),
-                                value: 'date',
-                              ),
-                              DropdownMenuItem(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Wörter',
-                                    ),
-                                  ],
-                                ),
-                                value: 'words',
-                              ),
-                            ],
+                        child: DropdownButton(
+                          underline: SizedBox(),
+                          isExpanded: true,
+                          style: GoogleFonts.sourceSansPro(
+                            color: secondaryTextColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: height * 0.02,
                           ),
+                          icon: null,
+                          value: dropdownValue,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                              log(dropdownValue);
+                            });
+                          },
+                          items: [
+                            DropdownMenuItem(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Latein',
+                                  ),
+                                ],
+                              ),
+                              value: 'latein',
+                            ),
+                            DropdownMenuItem(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Englisch',
+                                  ),
+                                ],
+                              ),
+                              value: 'englisch',
+                            ),
+                            DropdownMenuItem(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Französisch',
+                                  ),
+                                ],
+                              ),
+                              value: 'französisch',
+                            ),
+                            DropdownMenuItem(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Italienisch',
+                                  ),
+                                ],
+                              ),
+                              value: 'italienisch',
+                            ),
+                            DropdownMenuItem(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Altgriechisch',
+                                  ),
+                                ],
+                              ),
+                              value: 'altgriechisch',
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -353,7 +371,7 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
         bottom: width * 0.03,
       ),
       child: Material(
-        elevation: 4.0,
+        elevation: 6.0,
         borderRadius: BorderRadius.circular(width * 0.025),
         //Main Container Body
         child: Container(
@@ -366,160 +384,135 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
             children: [
               //Top Part
               Material(
-                elevation: 6.0,
+                elevation: 4.0,
                 borderRadius: BorderRadius.circular(width * 0.025),
                 child: Container(
                   decoration: BoxDecoration(
                     color: LanguageHelper.getLanguageColor(widget.lang),
                     borderRadius: BorderRadius.circular(width * 0.025),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(width * 0.03),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: width * 0.015),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: width * 0.16,
-                                    width: width * 0.16,
-                                    decoration: BoxDecoration(
-                                      color: secondaryColor,
-                                      borderRadius:
-                                          BorderRadius.circular(width * 0.16),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: width * 0.03,
-                                  ),
-                                  Container(
-                                    width: width * 0.54,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          widget.queryName,
-                                          style: GoogleFonts.sourceSansPro(
-                                            fontSize: width * 0.06,
-                                            color: primaryTextColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            IconButton(
-                                icon: Icon(
-                                  Icons.more_vert,
-                                  size: width * 0.06,
-                                  color: secondaryColor,
-                                ),
-                                onPressed: () => _showCardActionDialog()),
-                          ],
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(width * 0.03),
+                        child: Container(
+                          height: height * 0.08,
+                          width: height * 0.08,
+                          decoration: BoxDecoration(
+                            color: secondaryColor,
+                            borderRadius: BorderRadius.circular(width * 0.16),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Tooltip(
+                          message: widget.queryName,
+                          textStyle: GoogleFonts.sourceSansPro(
+                            fontSize: height * 0.03,
+                            color: primaryTextColor,
+                          ),
+                          child: Text(
+                            widget.queryName,
+                            style: GoogleFonts.sourceSansPro(
+                              fontSize: height * 0.033,
+                              color: primaryTextColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.more_vert,
+                          size: height * 0.033,
+                          color: secondaryColor,
+                        ),
+                        onPressed: () => _showCardActionDialog(),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Center(
+              Padding(
+                padding: EdgeInsets.only(
+                  left: width * 0.03,
+                  right: width * 0.03,
+                  bottom: width * 0.03,
+                  top: width * 0.015,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     //Good Vocabulary
-                    GestureDetector(
-                      onTap: () =>
-                          log('Good query started for ${widget.queryId}'),
-                      child: SizedBox(
-                        width: width * 0.47,
-                        child: Padding(
-                          padding: EdgeInsets.all(width * 0.03),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Starke Vokabeln',
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.022,
-                                  color: secondaryTextColor,
-                                ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () =>
+                            log('Good query started for ${widget.queryId}'),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Starke Vokabeln',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: height * 0.025,
+                                color: secondaryTextColor,
                               ),
-                              Text(
-                                widget.vocGoodCount.toString(),
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.035,
-                                  fontWeight: FontWeight.bold,
-                                  color: secondaryTextColor,
-                                ),
+                              maxLines: 1,
+                            ),
+                            Text(
+                              widget.vocGoodCount.toString(),
+                              style: GoogleFonts.notoSans(
+                                fontSize: height * 0.035,
+                                fontWeight: FontWeight.bold,
+                                color: secondaryTextColor,
                               ),
-                              SizedBox(
-                                height: width * 0.015,
+                            ),
+                            Text(
+                              'Starten',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: height * 0.025,
+                                color: accentColor,
                               ),
-                              Text(
-                                'Starten',
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.025,
-                                  color: accentColor,
-                                ),
-                              ),
-                            ],
-                          ),
+                              maxLines: 1,
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     //Bad Vocabulary
-                    GestureDetector(
-                      onTap: () =>
-                          log('Bad query started for ${widget.queryId}'),
-                      child: SizedBox(
-                        width: width * 0.47,
-                        child: Padding(
-                          padding: EdgeInsets.all(width * 0.03),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                'Schwache Vokabeln',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.022,
-                                  color: secondaryTextColor,
-                                ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () =>
+                            log('Bad query started for ${widget.queryId}'),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Schwache Vokabeln',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: height * 0.025,
+                                color: secondaryTextColor,
                               ),
-                              Text(
-                                widget.vocGoodCount.toString(),
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.035,
-                                  fontWeight: FontWeight.bold,
-                                  color: secondaryTextColor,
-                                ),
+                              maxLines: 1,
+                            ),
+                            Text(
+                              widget.vocGoodCount.toString(),
+                              style: GoogleFonts.notoSans(
+                                fontSize: height * 0.035,
+                                fontWeight: FontWeight.bold,
+                                color: secondaryTextColor,
                               ),
-                              SizedBox(
-                                height: width * 0.015,
+                            ),
+                            Text(
+                              'Starten',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: height * 0.025,
+                                color: accentColor,
                               ),
-                              Text(
-                                'Starten',
-                                style: GoogleFonts.sourceSansPro(
-                                  fontSize: height * 0.025,
-                                  color: accentColor,
-                                ),
-                              ),
-                            ],
-                          ),
+                              maxLines: 1,
+                            ),
+                          ],
                         ),
                       ),
                     ),

@@ -39,7 +39,7 @@ class CustomActionButton extends StatelessWidget {
                 Icon(
                   icon,
                   color: primaryTextColor,
-                  size: _height * 0.04,
+                  size: _height * 0.045,
                 ),
               if (icon != null)
                 SizedBox(
