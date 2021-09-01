@@ -93,85 +93,84 @@ class _QueryStartScreenState extends State<QueryStartScreen> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: DropdownButton(
-                          underline: SizedBox(),
-                          isExpanded: true,
-                          style: GoogleFonts.sourceSansPro(
-                            color: secondaryTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: height * 0.02,
-                          ),
-                          icon: null,
-                          value: dropdownValue,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              dropdownValue = newValue;
-                              log(dropdownValue);
-                            });
-                          },
-                          items: [
-                            DropdownMenuItem(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Latein',
-                                  ),
-                                ],
-                              ),
-                              value: 'latein',
-                            ),
-                            DropdownMenuItem(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Englisch',
-                                  ),
-                                ],
-                              ),
-                              value: 'englisch',
-                            ),
-                            DropdownMenuItem(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Französisch',
-                                  ),
-                                ],
-                              ),
-                              value: 'französisch',
-                            ),
-                            DropdownMenuItem(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Italienisch',
-                                  ),
-                                ],
-                              ),
-                              value: 'italienisch',
-                            ),
-                            DropdownMenuItem(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Altgriechisch',
-                                  ),
-                                ],
-                              ),
-                              value: 'altgriechisch',
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
+                ),
+              ),
+              Expanded(
+                child: DropdownButton(
+                  underline: SizedBox(),
+                  isExpanded: true,
+                  style: GoogleFonts.sourceSansPro(
+                    color: secondaryTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: height * 0.02,
+                  ),
+                  icon: null,
+                  value: dropdownValue,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                      log(dropdownValue);
+                    });
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Latein',
+                          ),
+                        ],
+                      ),
+                      value: 'latein',
+                    ),
+                    DropdownMenuItem(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Englisch',
+                          ),
+                        ],
+                      ),
+                      value: 'englisch',
+                    ),
+                    DropdownMenuItem(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Französisch',
+                          ),
+                        ],
+                      ),
+                      value: 'französisch',
+                    ),
+                    DropdownMenuItem(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Italienisch',
+                          ),
+                        ],
+                      ),
+                      value: 'italienisch',
+                    ),
+                    DropdownMenuItem(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Altgriechisch',
+                          ),
+                        ],
+                      ),
+                      value: 'altgriechisch',
+                    ),
+                  ],
                 ),
               ),
               // ListView(
@@ -383,58 +382,58 @@ class _QueryOverviewCardState extends State<QueryOverviewCard> {
           child: Column(
             children: [
               //Top Part
-              Material(
-                elevation: 4.0,
-                borderRadius: BorderRadius.circular(width * 0.025),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: LanguageHelper.getLanguageColor(widget.lang),
-                    borderRadius: BorderRadius.circular(width * 0.025),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(width * 0.03),
+                    child: Container(
+                      height: height * 0.08,
+                      width: height * 0.08,
+                      decoration: BoxDecoration(
+                        color: secondaryColor,
+                        borderRadius: BorderRadius.circular(width * 0.16),
+                        border: Border.all(
+                          color: LanguageHelper.getLanguageColor(widget.lang),
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(width * 0.03),
-                        child: Container(
-                          height: height * 0.08,
-                          width: height * 0.08,
-                          decoration: BoxDecoration(
-                            color: secondaryColor,
-                            borderRadius: BorderRadius.circular(width * 0.16),
-                          ),
-                        ),
+                  Expanded(
+                    child: Tooltip(
+                      message: widget.queryName,
+                      textStyle: GoogleFonts.sourceSansPro(
+                        fontSize: height * 0.03,
+                        color: primaryTextColor,
                       ),
-                      Expanded(
-                        child: Tooltip(
-                          message: widget.queryName,
-                          textStyle: GoogleFonts.sourceSansPro(
-                            fontSize: height * 0.03,
-                            color: primaryTextColor,
-                          ),
-                          child: Text(
-                            widget.queryName,
-                            style: GoogleFonts.sourceSansPro(
-                              fontSize: height * 0.033,
-                              color: primaryTextColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                      child: Text(
+                        widget.queryName,
+                        style: GoogleFonts.sourceSansPro(
+                          fontSize: height * 0.033,
+                          color: secondaryTextColor,
+                          fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.more_vert,
-                          size: height * 0.033,
-                          color: secondaryColor,
-                        ),
-                        onPressed: () => _showCardActionDialog(),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.more_vert,
+                      size: height * 0.033,
+                      color: secondaryTextColor,
+                    ),
+                    onPressed: () => _showCardActionDialog(),
+                  ),
+                ],
+              ),
+              Divider(
+                indent: width * 0.03,
+                endIndent: width * 0.03,
+                height: 1,
+                color: secondaryAltTextColor,
               ),
               Padding(
                 padding: EdgeInsets.only(
